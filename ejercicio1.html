@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1 - Lista de Usuarios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #usuarios {
+            margin-top: 20px;
+        }
+        .usuario {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .loading {
+            color: #666;
+            font-style: italic;
+        }
+        .error {
+            color: red;
+        }
+
+          /* Estilo del icono de casita */
+        .home-icon {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        transition: 0.3s;
+        z-index: 1000; 
+        }
+
+        .home-icon:hover {
+        transform: scale(1.1);
+         }
+    </style>
+</head>
+<body>
+    <h1>📋 Lista de Usuarios</h1>
+    <button id="cargarBtn">Cargar Usuarios</button>
+    <div id="usuarios"></div>
+    
+    <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Inicio"
+                class="home-icon" id="homeBtn"> 
+
+    <script>
+        // TU CÓDIGO AQUÍ
+        
+        const cargarBtn = document.getElementById('cargarBtn');
+        const usuariosDiv = document.getElementById('usuarios');
+
+        cargarBtn.addEventListener('click', cargarUsuarios);
+
+        function cargarUsuarios() {
+        // Paso 1: Mostrar mensaje de carga
+        usuariosDiv.innerHTML = '<p class="loading">Cargando usuarios...</p>';
+    
+        // Paso 2: Hacer la petición con fetch
+
+        const url = 'https://jsonplaceholder.typicode.com/users'; 
+        fetch(url) 
+        .then(respuesta =>{ 
+            if(!respuesta.ok){ /*si no fue exitosa lanza error con el codigo de estado HTTP*/
+                throw new Error(`HTTP error! status: ${respuesta.status}`)
+            }
+            return respuesta.json() /*es exitosta...regresa una respuesta en formato JSON*/
+        })
+        .then(usuarios => {
+            mostrarUsuarios(usuarios)
+        }) /*entonces mandala al usuario*/
+        .catch(error => usuariosDiv.innerHTML = `<p>Error: ${error.message}<\p>`) /*Si ocurre cualquier error, muestra mensaje*/
+        }
+
+        function mostrarUsuarios(usuarios) {
+        // Crear el HTML para cada usuario
+            const html = usuarios.map(usuario => `
+            <div class="usuario">
+                <h3>${usuario.name}</h3>
+                <p><strong>Email:</strong> ${usuario.email}</p>
+                <p><strong>Teléfono:</strong> ${usuario.phone}</p>
+                <p><strong>Ciudad:</strong> ${usuario.address.city}</p>
+            </div>
+        `).join('');
+    
+    usuariosDiv.innerHTML = html;
+        }
+
+        const homeBtn = document.getElementById('homeBtn');
+        homeBtn.addEventListener('click', () =>{
+            window.location.href = 'index.html';
+        });
+
+    </script>
+
+</body>
+</html>

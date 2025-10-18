@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 100px;
+      background-color: #f0f2f5;
+    }
+
+    button {
+      display: block;
+      width: 200px;
+      margin: 10px auto;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #873487;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bienvenido(a)</h1>
+
+  <!-- Botones sin onclick directo -->
+  <button id="btn1">Ir a Lista de Usuarios</button>
+  <button id="btn2">Ir a Buscador Pokemon</button>
+  <button id="btn3">Ir a Explorador de Paises</button>
+  <button id="btn4">Ir a Blog de Post</button>
+
+  <script>
+    // Obtenemos los botones por su ID
+    const btn1 = document.getElementById('btn1');
+    const btn2 = document.getElementById('btn2');
+    const btn3 = document.getElementById('btn3');
+    const btn4 = document.getElementById('btn4');
+
+    // Asignamos la acción con JavaScript
+    btn1.addEventListener('click', () => {
+      window.location.href = 'ejercicio1.html';
+    });
+
+    btn2.addEventListener('click', () => {
+      window.location.href = 'ejercicio2.html';
+    });
+
+    btn3.addEventListener('click', () => {
+      window.location.href = 'ejercicio3.html';
+    });
+
+    btn4.addEventListener('click', () => {
+      window.location.href = 'ejercicio4.html';
+    });
+  </script>
+</body>
+</html>
+
+</body>
+</html>
